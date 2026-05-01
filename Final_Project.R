@@ -13,7 +13,7 @@ library(ggplot2)
 setwd("/Users/harishsathiyamoorthy/Documents/New project")
 getwd()
 
-# Create folders for the tables and figures if they do not already exist.
+# Created folders for the tables and figures
 dir.create("output/tables", recursive = TRUE, showWarnings = FALSE)
 dir.create("output/figures", recursive = TRUE, showWarnings = FALSE)
 
@@ -22,9 +22,7 @@ dir.create("output/figures", recursive = TRUE, showWarnings = FALSE)
 # 1. Read in the data
 # ------------------------------------------------------------
 
-# These files come from the Formula One World Championship dataset on Kaggle.
-# They are saved in the data folder so the project can be uploaded to GitHub.
-
+# The files are from Formula One World Championship dataset on Kaggle.
 
 results <- read.csv("data/results.csv")
 races <- read.csv("data/races.csv")
@@ -35,11 +33,11 @@ drivers <- read.csv("data/drivers.csv")
 # 2. Merge the datasets and create project variables
 # ------------------------------------------------------------
 
-# Keep only the race information needed from races.csv.
+# Keep only the race information
 races_small <- races %>%
   select(raceId, year, race_name = name)
 
-# Keep only the driver information needed from drivers.csv.
+# Keep only the driver information 
 drivers_small <- drivers %>%
   mutate(driver_name = paste(forename, surname)) %>%
   select(driverId, driver_name, nationality)
@@ -49,7 +47,7 @@ f1 <- results %>%
   left_join(races_small, by = "raceId") %>%
   left_join(drivers_small, by = "driverId")
 
-# Create variables that directly answer the research questions.
+# Created variables that answer the research questions.
 # grid is starting position and positionOrder is finishing position.
 f1 <- f1 %>%
   filter(grid > 0) %>%
@@ -70,8 +68,8 @@ f1 <- f1 %>%
 # 3. Descriptive stat table
 # ------------------------------------------------------------
 
-# This table compares pole starters to non-pole starters.
-# It reports the mean, median, standard deviation, minimum, and maximum.
+# Table is to compare to pole starters and non-pole starters.
+# Reports the mean, median, standard deviation, minimum, and maximum.
 descriptive_table <- f1 %>%
   group_by(pole_start) %>%
   summarize_at(
@@ -85,7 +83,7 @@ descriptive_table <- f1 %>%
     )
   )
 
-# View and export the descriptive table.
+# Export the descriptive table.
 descriptive_table
 write.csv(descriptive_table, "output/tables/descriptive_table_by_pole.csv", row.names = FALSE)
 
@@ -95,7 +93,7 @@ write.csv(descriptive_table, "output/tables/descriptive_table_by_pole.csv", row.
 # Does starting position predict finishing position?
 # ------------------------------------------------------------
 
-# Calculate the average finishing position and points by starting grid position.
+# Calculattion of the average finishing position and points by starting grid position.
 starting_position_summary <- f1 %>%
   group_by(grid) %>%
   summarize(
@@ -105,12 +103,11 @@ starting_position_summary <- f1 %>%
     .groups = "drop"
   )
 
-# View and export the table.
+# Export the table.
 starting_position_summary
 write.csv(starting_position_summary, "output/tables/starting_position_summary.csv", row.names = FALSE)
 
 # Scatter plot of starting position and finishing position.
-# Lower numbers are better in both variables.
 start_finish_plot <- ggplot(f1, aes(x = grid, y = positionOrder)) +
   geom_jitter(width = 0.25, height = 0.25, alpha = 0.15, color = "steelblue") +
   labs(
@@ -198,7 +195,7 @@ position_change_table <- f1 %>%
     .groups = "drop"
   )
 
-# View and export the table.
+# Export the table.
 position_change_table
 write.csv(position_change_table, "output/tables/position_change_table.csv", row.names = FALSE)
 
@@ -227,7 +224,7 @@ position_gain_by_grid <- f1 %>%
     .groups = "drop"
   )
 
-# View and export the table.
+# Export the table.
 position_gain_by_grid
 write.csv(position_gain_by_grid, "output/tables/position_gain_by_grid.csv", row.names = FALSE)
 
@@ -249,10 +246,10 @@ ggsave("output/figures/average_positions_gained_by_grid.png", positions_gained_p
 
 
 # ------------------------------------------------------------
-# 7. Main results to use in the README and presentation
+# 7. Main results for the README and presentation
 # ------------------------------------------------------------
 
-# These lines print the main numbers clearly in the console.
+# Print the main numbers clearly in the console.
 pole_win_rate <- pole_outcome_table %>%
   filter(pole_start == "Pole Starter") %>%
   pull(win_rate)
@@ -264,7 +261,7 @@ pole_podium_rate <- pole_outcome_table %>%
 cat("Pole starters won", round(pole_win_rate, 1), "percent of races in the data.\n")
 cat("Pole starters finished on the podium", round(pole_podium_rate, 1), "percent of the time.\n")
 
-# Save the cleaned dataset too, so the final project is easier to replicate.
+# Cleaned dataset save.
 write.csv(f1, "output/tables/cleaned_f1_data.csv", row.names = FALSE)
 
 
