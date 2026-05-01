@@ -1,5 +1,7 @@
 Harish Sathiyamoorthy
+
 ECON 4970 - Data Science for Economics
+
 April 2026
 
 # Does Qualifying Performance Affect Race Outcomes in Formula One?
