@@ -35,22 +35,22 @@ The main variables used in the analysis were:
 ## Results
 
 ### Average Finishing Position by Starting Position
-![Average Finishing Position by Starting Position](average_finish_by_grid.png)
+<img src="https://raw.githubusercontent.com/haribus1801-a11y/formula-one-qualifying-analysis/main/average_finish_by_grid.png" alt="Average Finishing Position by Starting Position" width="800">
 
 This graph shows that starting position is strongly related to finishing position. Drivers who start closer to the front tend to finish closer to the front on average. As starting position gets worse, average finishing position also becomes worse.
 
 ### Win Rate by Pole Position Status
-![Win Rate by Pole Position Status](win_rate_by_pole_status.png)
+<img src="https://raw.githubusercontent.com/haribus1801-a11y/formula-one-qualifying-analysis/main/win_rate_by_pole_status.png" alt="Win Rate by Pole Position Status" width="800">
 
 Pole starters win much more often than non-pole starters. In this dataset, pole starters won about 42.3% of races, while non-pole starters had a much lower win rate. This suggests that starting first provides a major advantage.
 
 ### Average Positions Gained by Starting Position
-![Average Positions Gained by Starting Position](average_positions_gained_by_grid.png)
+<img src="https://raw.githubusercontent.com/haribus1801-a11y/formula-one-qualifying-analysis/main/average_positions_gained_by_grid.png" alt="Average Positions Gained by Starting Position" width="800">
 
 Drivers starting farther back tend to gain more positions on average during the race, while drivers starting near the front tend to lose positions on average. This makes sense because drivers at the front have fewer positions to gain and more positions to lose, while drivers farther back have more room to move up.
 
 ### Position Change Categories
-![How Often Drivers Gain or Lose Positions](position_change_categories.png)
+<img src="https://raw.githubusercontent.com/haribus1801-a11y/formula-one-qualifying-analysis/main/position_change_categories.png" alt="How Often Drivers Gain or Lose Positions" width="800">
 
 This graph shows that drivers gained positions in about 51.0% of driver-race entries, lost positions in about 39.7%, and had no change in about 9.3%. This shows that race-day movement is common, even though qualifying still matters a lot.
 
